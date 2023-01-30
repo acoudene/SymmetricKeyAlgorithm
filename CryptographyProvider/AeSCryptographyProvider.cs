@@ -2,15 +2,16 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SymmetricKeyAlgorithm;
+namespace CryptographyProvider;
 
 /// <summary>
 /// Provider dedicated to AES encryption
 /// </summary>
 public class AeSCryptographyProvider : ICryptographyProvider
 {
-  public const byte KeySizeInBytes = 32;
   public const byte BlockSizeInBytes = 16;
+
+  public byte KeySizeInBytes { get; } = 32;
 
   /// <summary>
   /// String encryption

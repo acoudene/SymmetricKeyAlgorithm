@@ -1,6 +1,7 @@
+using CryptographyProvider;
 using System.Text;
 
-namespace SymmetricKeyAlgorithm;
+namespace Test;
 
 public class AeSCryptographyProviderTest
 {
@@ -25,9 +26,9 @@ public class AeSCryptographyProviderTest
   {
     // ARRANGE
     string myValue = GenerateRandomText(_longTextLimitValue);
-    string key = GenerateRandomText(AeSCryptographyProvider.KeySizeInBytes);
     var provider = new AeSCryptographyProvider();
-    
+    string key = GenerateRandomText(provider.KeySizeInBytes);
+
     // ACT
     string myValueEncrypted = provider.Encrypt(myValue, key);
     string myValueDecrypted = provider.Decrypt(myValueEncrypted, key);

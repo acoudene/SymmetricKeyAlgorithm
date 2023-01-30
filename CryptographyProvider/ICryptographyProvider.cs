@@ -1,10 +1,12 @@
-﻿namespace SymmetricKeyAlgorithm;
+﻿namespace CryptographyProvider;
 
 /// <summary>
 /// Provider of encryption
 /// </summary>
 public interface ICryptographyProvider
 {
+  byte KeySizeInBytes { get; }
+
   /// <summary>
   /// Encrypt a clear string
   /// </summary>
