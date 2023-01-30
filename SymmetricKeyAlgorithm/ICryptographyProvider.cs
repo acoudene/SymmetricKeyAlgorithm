@@ -11,7 +11,7 @@ public interface ICryptographyProvider
   /// <param name="clearString"></param>
   /// <param name="key"></param>
   /// <returns></returns>
-  string EncryptString(string clearString, string key);
+  string Encrypt(string clearString, string key);
 
   /// <summary>
   /// Decrypt an encrypted string
@@ -19,5 +19,5 @@ public interface ICryptographyProvider
   /// <param name="encryptedString"></param>
   /// <param name="key"></param>
   /// <returns></returns>
-  string DecryptString(string encryptedString, string key);
+  string Decrypt(string encryptedString, string key);
 }
