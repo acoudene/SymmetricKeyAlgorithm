@@ -9,7 +9,7 @@
 ## Le principe de la librairie :
 
 -	Un contrat de gestion de la cryptographie : ICryptographyProvider qui a des méthodes Encrypt/Decrypt avec une chaîne et une clé en donnant une taille de clé à utiliser
--	Une implémentation de chiffrement symétrique basé sur AES : AeSCryptographyProvider
+-	Une implémentation de chiffrement symétrique basée sur AES : AeSCryptographyProvider
 -	Un contrat de génération de clé en stateful : IStatefulKeyGenerator qui possède une méthode de génération de clé selon une taille de clé.
 -	Un contrat stateful de crypto : IStatefulCryptographyProvider avec des méthodes Encrypt/Decrypt mais sans clé, associé à une implémentation StatefulCryptographyProvider qui aggrège un ICryptographyProvider et un IStatefulKeyGenerator.
 -	Un exemple d'implémentation StateFul pour chiffrer ou déchiffrer du texte en incluant la génération de la clé à la volée.
