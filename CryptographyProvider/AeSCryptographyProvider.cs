@@ -25,17 +25,19 @@ public class AeSCryptographyProvider : ICryptographyProvider
       return string.Empty;
 
     Guard.IsNotNullOrWhiteSpace(key);
- 
+    Guard.IsEqualTo(key.Length, KeySizeInBytes);
+
+    // Create a new Aes object to generate the key and IV
     using Aes aes = Aes.Create();
- 
-    byte[] iv = new byte[BlockSizeInBytes];
-    byte[] array;
-
     aes.Key = Encoding.UTF8.GetBytes(key);
-    aes.IV = iv;
 
+    // Security improvement: generate a new IV for each encryption
+    aes.GenerateIV(); 
+    byte[] iv = aes.IV;
+    byte[] encryptedArray;
+
+    // Encrypt the data
     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-
     using (MemoryStream memoryStream = new MemoryStream())
     using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
     {
@@ -43,10 +45,15 @@ public class AeSCryptographyProvider : ICryptographyProvider
       {
         streamWriter.Write(clearString);
       }
-      array = memoryStream.ToArray();
+      encryptedArray = memoryStream.ToArray();
     }
 
-    string encryptedString = Convert.ToBase64String(array);
+    // Concatenate IV with encrypted data
+    byte[] result = new byte[iv.Length + encryptedArray.Length];
+    Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
+    Buffer.BlockCopy(encryptedArray, 0, result, iv.Length, encryptedArray.Length);
+
+    string encryptedString = Convert.ToBase64String(result);
     return encryptedString;
 
   }
@@ -63,17 +70,23 @@ public class AeSCryptographyProvider : ICryptographyProvider
       return string.Empty;
 
     Guard.IsNotNullOrWhiteSpace(key);
+    Guard.IsEqualTo(key.Length, KeySizeInBytes);
 
-    using Aes aes = Aes.Create();
-    
-    byte[] iv = new byte[BlockSizeInBytes];
+    // Get IV and cipher text from the encrypted string
     byte[] buffer = Convert.FromBase64String(encryptedString);
+    byte[] iv = new byte[BlockSizeInBytes];
+    byte[] cipherText = new byte[buffer.Length - iv.Length];
+    Buffer.BlockCopy(buffer, 0, iv, 0, iv.Length);
+    Buffer.BlockCopy(buffer, iv.Length, cipherText, 0, cipherText.Length);
 
+    // Create a new Aes object to decrypt the data
+    using Aes aes = Aes.Create();
     aes.Key = Encoding.UTF8.GetBytes(key);
     aes.IV = iv;
-    ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-    using MemoryStream memoryStream = new MemoryStream(buffer);
+    // Decrypt the data
+    ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+    using MemoryStream memoryStream = new MemoryStream(cipherText);
     using CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read);
     using StreamReader streamReader = new StreamReader((Stream)cryptoStream);
 
