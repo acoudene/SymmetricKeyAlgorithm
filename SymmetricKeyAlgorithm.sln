@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{2E04517F-565E-4E30-B373-798E4FFCE98F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiBlazorApp", "MauiBlazorApp\MauiBlazorApp.csproj", "{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptographyProvider", "CryptographyProvider\CryptographyProvider.csproj", "{A78A497B-C15A-495F-A9CB-B0AAC3191073}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiBlazorHybridApp", "MauiBlazorHybridApp\MauiBlazorHybridApp.csproj", "{BCDA9CF0-1AFF-4870-9059-240C902E0486}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,15 @@ Global
 		{2E04517F-565E-4E30-B373-798E4FFCE98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E04517F-565E-4E30-B373-798E4FFCE98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E04517F-565E-4E30-B373-798E4FFCE98F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1555F97C-C87D-4E7D-BE7D-6D7F23F4C87D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{A78A497B-C15A-495F-A9CB-B0AAC3191073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A78A497B-C15A-495F-A9CB-B0AAC3191073}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A78A497B-C15A-495F-A9CB-B0AAC3191073}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A78A497B-C15A-495F-A9CB-B0AAC3191073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
