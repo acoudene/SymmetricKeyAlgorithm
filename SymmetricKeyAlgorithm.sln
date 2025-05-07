@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptographyProvider", "Cry
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiBlazorHybridApp", "MauiBlazorHybridApp\MauiBlazorHybridApp.csproj", "{BCDA9CF0-1AFF-4870-9059-240C902E0486}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppHost", "AppHost\AppHost.csproj", "{7775C264-B87C-4291-9D50-335950F6BA9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp", "BlazorApp\BlazorApp\BlazorApp.csproj", "{FA374AAA-BA2D-4022-A321-AB169CAA3765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp.Client", "BlazorApp\BlazorApp.Client\BlazorApp.Client.csproj", "{45397AE4-4C7C-4785-ACAA-6A1E30C5EED3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +34,18 @@ Global
 		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCDA9CF0-1AFF-4870-9059-240C902E0486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7775C264-B87C-4291-9D50-335950F6BA9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7775C264-B87C-4291-9D50-335950F6BA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7775C264-B87C-4291-9D50-335950F6BA9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7775C264-B87C-4291-9D50-335950F6BA9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA374AAA-BA2D-4022-A321-AB169CAA3765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA374AAA-BA2D-4022-A321-AB169CAA3765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA374AAA-BA2D-4022-A321-AB169CAA3765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA374AAA-BA2D-4022-A321-AB169CAA3765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45397AE4-4C7C-4785-ACAA-6A1E30C5EED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45397AE4-4C7C-4785-ACAA-6A1E30C5EED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45397AE4-4C7C-4785-ACAA-6A1E30C5EED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45397AE4-4C7C-4785-ACAA-6A1E30C5EED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

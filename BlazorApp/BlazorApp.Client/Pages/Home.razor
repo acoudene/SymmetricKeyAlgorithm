@@ -1,0 +1,44 @@
+﻿.
+@page "/"
+@using BlazorApp.Client.Dtos
+@* @using CryptographyProvider; *@
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<div>
+  <p role="status">Give data to protect: </p>
+  <InputText id="text" @bind-Value="_textToProtect" />
+  <button @onclick="UpdateAsync">Update</button>
+</div>
+<div>
+  <label id="encryptedText">Encrypted value: @_encryptedText</label>
+</div>
+<div>
+  <label id="decryptedText">Decrypted value: @_decryptedText</label>
+</div>
+
+@code {
+  private string _textToProtect = string.Empty;
+  private string _encryptedText = string.Empty;
+  private string _decryptedText = string.Empty;
+
+  [Inject]
+  public required IHttpClientFactory HttpClientFactory { private get; init; }
+
+  private async Task UpdateAsync()
+  {
+    var createOrUpdateDto = new CryptoDataDto
+      {
+        Text = _textToProtect
+      };
+    using HttpClient client = HttpClientFactory.CreateClient("Crypto");
+    HttpResponseMessage response = await client.PostAsJsonAsync<CryptoDataDto>(string.Empty, createOrUpdateDto);
+    response.EnsureSuccessStatusCode();
+
+    _encryptedText = (await client.GetFromJsonAsync<CryptoDataDto>("raw"))?.Text ?? string.Empty;
+    _decryptedText = (await client.GetFromJsonAsync<CryptoDataDto>(string.Empty))?.Text ?? string.Empty;
+
+  }
+}
