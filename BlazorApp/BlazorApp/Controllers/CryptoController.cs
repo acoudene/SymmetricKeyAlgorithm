@@ -1,4 +1,5 @@
 ﻿using BlazorApp.Client.Dtos;
+using CryptographyProvider;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System.Net.Mime;
@@ -10,8 +11,15 @@ namespace BlazorApp.Controllers;
 public class CryptoController : ControllerBase
 {
   private readonly IMongoCollection<CryptoDataDto> _collection;
+  private readonly IStatefulCryptographyProvider _cryptographyProvider;
 
-  public CryptoController(IMongoCollection<CryptoDataDto> collection) => _collection = collection;
+  public CryptoController(
+    IMongoCollection<CryptoDataDto> collection, 
+    IStatefulCryptographyProvider cryptographyProvider)
+  {
+    _collection = collection;
+    _cryptographyProvider = cryptographyProvider;
+  }
   
   [HttpGet("raw")]
   [Produces(MediaTypeNames.Application.Json)]
@@ -46,10 +54,17 @@ public class CryptoController : ControllerBase
   {
     try
     {
-      return
-        await _collection
+      var encryptedDto = await _collection
         .Find(_ => true)
         .FirstOrDefaultAsync(cancellationToken);
+
+      if (encryptedDto is null)
+        return NotFound();
+
+      return new CryptoDataDto 
+      {
+        Text = _cryptographyProvider.Decrypt(encryptedDto.Text)
+      };
     }
     catch (ArgumentException)
     {
@@ -77,8 +92,13 @@ public class CryptoController : ControllerBase
       if (newOrToUpdateDto is null)
         throw new ArgumentNullException(nameof(newOrToUpdateDto));
 
+      var encryptedDto = new CryptoDataDto
+      {
+        Text = _cryptographyProvider.Encrypt(newOrToUpdateDto.Text)
+      };
+
       var filter = Builders<CryptoDataDto>.Filter.Empty;
-      await _collection.ReplaceOneAsync(filter, newOrToUpdateDto, new ReplaceOptions { IsUpsert = true });
+      await _collection.ReplaceOneAsync(filter, encryptedDto, new ReplaceOptions { IsUpsert = true });
 
       return await _collection
         .Find(_ => true)

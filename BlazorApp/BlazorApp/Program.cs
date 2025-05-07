@@ -1,3 +1,4 @@
+using Azure.Security.KeyVault.Secrets;
 using BlazorApp;
 using BlazorApp.Client.Dtos;
 using BlazorApp.Components;
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 
 builder.AddMongoDBClient(connectionName: "mongodb");
+builder.AddAzureKeyVaultClient(connectionName: "keyvault");
 
 builder.Services.AddTransient(
     sp => sp.GetRequiredService<IMongoDatabase>().GetCollection<CryptoDataDto>("CryptoData"));
@@ -50,5 +52,12 @@ app.MapControllers();
 
 var pack = new ConventionPack { new IgnoreExtraElementsConvention(true) };
 ConventionRegistry.Register("IgnoreExtraElements", pack, t => true);
+
+// TODO
+// Prepare a secret
+//var secretClient = app.Services.GetRequiredService<SecretClient>();
+//const string secretName = "aes-secret-key";
+//const string secretValue = "012345678901234567890123456789012";
+//await secretClient.SetSecretAsync(secretName, secretValue);
 
 app.Run();
