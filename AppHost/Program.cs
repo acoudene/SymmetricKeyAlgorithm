@@ -1,16 +1,14 @@
-using Azure.Identity;
-using Azure.Provisioning.KeyVault;
-using Azure.Security.KeyVault.Secrets;
-using Microsoft.Extensions.Azure;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+/// Prerequesite: 
+/// - when created here, azure keyvault should then have a secret named "aes-secret-key"
+/// - to create a secret, user should have this role: KeyVaultSecretsOfficer
+/// - These operations should be set before tested the first time.
 
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Azure Keyvault
 // https://learn.microsoft.com/en-us/dotnet/aspire/security/azure-security-key-vault-integration?tabs=dotnet-cli
 var keyVault = builder.AddAzureKeyVault("keyvault");
-  
+
 // MongoDB
 // https://learn.microsoft.com/en-us/dotnet/aspire/database/mongodb-integration?tabs=dotnet-cli
 var mongo = builder.AddMongoDB("mongo")
