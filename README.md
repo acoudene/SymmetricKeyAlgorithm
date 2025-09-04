@@ -86,12 +86,19 @@ string? symKey = builder.Configuration["SYM_KEY"];
 ## Autres commandes utiles
 
 `kubectl logs debian-pod`
+
 `kubectl delete pod debian-pod`
+
 `kubectl apply -f ./debian-pod.yaml`
+
 `kubectl create secret generic sym-key --from-literal=SYM_KEY=<key>`
+
 `kubectl get secret sym-key -o jsonpath='{.data.SYM_KEY}' | base64 –decode`
+
 `echo -n anthony|base64`
+
 `kubectl patch secret sym-key-p '{"data": {"SYM_KEY": "YW50aG9ueQ=="}}'`
+
 `kubectl get secret sym-key-o yaml`
 
 # Annexe :
