@@ -43,6 +43,57 @@ Une appli web qui laisse l'utilisateur saisir une donnée et qui sera sous son a
 
 ![Chiffrement Symétrique avec coffre pour clé](https://github.com/user-attachments/assets/3858b1b1-a665-46c9-a634-68406dd5ec28)
 
+# Tutoriel pour utiliser un secret comme valeur de variable d’environnement de Kubernetes
+
+## Etapes 
+
+1. Créer le secret : Utilisez la commande kubectl create secret pour créer un secret. Par exemple, pour créer un secret avec un nom d'utilisateur :
+
+`kubectl create secret generic sym-key --from-literal=SYM_KEY=<key>`
+
+2. Définir le secret dans le pod :
+Ajoutez le secret en tant que variable d'environnement dans le fichier de configuration de votre pod. Voici un exemple de configuration YAML :
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debian-pod
+spec:
+  containers:
+  - name: debian-container
+    image: debian:latest    
+    command: ["/bin/bash", "-c", "while true; do echo $SYM_KEY; sleep 10;done"]    
+    env:
+    - name: SYM_KEY
+      valueFrom:
+        secretKeyRef:
+          name: sym-key
+          key: SYM_KEY
+```
+
+3. Vérifier le secret dans le pod : Une fois le pod déployé, vous pouvez vérifier que la variable d'environnement est correctement définie en exécutant une commande dans le pod :
+
+`kubectl exec -it debian-pod -- printenv SYM_KEY`
+
+## Côté code
+Utilisation de la propriété Configuration pour récupérer cette variable d’environnement (multi source selon les priorités : paramètres, variable d’environnement, secret, …)
+
+```
+string? symKey = builder.Configuration["SYM_KEY"];
+```
+
+## Autres commandes utiles
+
+`kubectl logs debian-pod`
+`kubectl delete pod debian-pod`
+`kubectl apply -f ./debian-pod.yaml`
+`kubectl create secret generic sym-key --from-literal=SYM_KEY=<key>`
+`kubectl get secret sym-key -o jsonpath='{.data.SYM_KEY}' | base64 –decode`
+`echo -n anthony|base64`
+`kubectl patch secret sym-key-p '{"data": {"SYM_KEY": "YW50aG9ueQ=="}}'`
+`kubectl get secret sym-key-o yaml`
+
 ## Annexe :
 
 ```
