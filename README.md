@@ -94,7 +94,7 @@ string? symKey = builder.Configuration["SYM_KEY"];
 `kubectl patch secret sym-key-p '{"data": {"SYM_KEY": "YW50aG9ueQ=="}}'`
 `kubectl get secret sym-key-o yaml`
 
-## Annexe :
+# Annexe :
 
 ```
 title Chiffrement Symétrique avec coffre pour clé
